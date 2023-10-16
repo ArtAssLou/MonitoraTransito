@@ -10,12 +10,13 @@ cont_CV = [] # Conta a velocidade dos carros
 cont_CAV = [] # Conta carro em alta velocidade
 cont_CSV = [] # Conta carro q passou sinal vermelho
 cont_t = 0 # PAra contar o numero de requisições
+cont_CV1 = [] # Conta a velocidade dos carros
+cont_CAV1 = [] # Conta carro em alta velocidade
+cont_CSV1 = [] # Conta carro q passou sinal vermelho
+cont_t1 = 0 # PAra contar o numero de requisições
 
-# Cria um objeto socket
 def servidor():
-    # Configurações do servidor e porta
-    #hosta = '164.41.98.29'  # ip da placa 7
-    hosta = '164.41.98.28' # ip placa 6
+    hosta = '164.41.98.28'  # IP da placa 6
     host = hosta
     port = 10770  # Insira a porta à qual deseja se conectar
     servidor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,11 +24,16 @@ def servidor():
     servidor_socket.bind((host, port))
     servidor_socket.listen(5)
     print(f"Servidor funcionando {host}")
-    while True:
-        client_socket, client_address = servidor_socket.accept()
-        print(f"Conexão estabelecida com {client_address}")
+
+    def handle_client(client_socket):
+        print(f"Conexão estabelecida com {client_socket.getpeername()}")
         recebe_dados(client_socket)
         client_socket.close()
+
+    while True:
+        client_socket, client_address = servidor_socket.accept()
+        client_thread = threading.Thread(target=handle_client, args=(client_socket,))
+        client_thread.start()
 
 
 # Função para limpar o terminal
@@ -53,7 +59,7 @@ def carro_a_vel():
             print (f"{soma} Carros/min \n")
             cont_carro = 0
 
-        print("O fluxo de carros na via Principal 1 é: ")
+        print("O fluxo de carros na via Principal 2 é: ")
         for carro in cont_CV:
                 if carro[0] == 'Via Principal 2:':
                     cont_carro += 1
@@ -75,6 +81,48 @@ def carro_a_vel():
 
         print("O fluxo de carros na via Auxiliar 2 é: ")
         for carro in cont_CV:
+                if carro[0] == 'Via Auxilia 2:':
+                    cont_carro += 1
+        if cont_carro != 0:
+            soma = cont_carro / cont_t 
+            soma = soma * 30
+            print (f"{soma} Carros/min \n")
+            cont_carro = 0
+
+        print("\nCruzamanto 1 \n")
+
+        print("O fluxo de carros na via Principal 1 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Principal 1:':
+                    cont_carro += 1
+        if cont_carro != 0:
+            soma = cont_carro / cont_t 
+            soma = soma * 30
+            print (f"{soma} Carros/min \n")
+            cont_carro = 0
+
+        print("O fluxo de carros na via Principal 2 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Principal 2:':
+                    cont_carro += 1
+        if cont_carro != 0:
+            soma = cont_carro / cont_t 
+            soma = soma * 30
+            print (f"{soma} Carros/min \n")
+            cont_carro = 0
+
+        print("O fluxo de carros na via Auxiliar 1 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Auxilia 1:':
+                    cont_carro += 1
+        if cont_carro != 0:
+            soma = cont_carro / cont_t 
+            soma = soma * 30
+            print (f"{soma} Carros/min \n")
+            cont_carro = 0
+
+        print("O fluxo de carros na via Auxiliar 2 é: ")
+        for carro in cont_CV1:
                 if carro[0] == 'Via Auxilia 2:':
                     cont_carro += 1
         if cont_carro != 0:
@@ -138,11 +186,57 @@ def vel_media():
             print (f"{soma} KM/H \n")
             cont_carro = 0
             contador = 0
+
+        print("Cruzamanto 1 \n")
+
+        print("A velocidade media da Principal 1 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Principal 1:':
+                    cont_carro += carro[2]
+                    contador += 1 
+        if contador != 0:
+            soma = cont_carro / contador 
+            print (f"{soma} KM/H \n")
+            cont_carro = 0
+            contador = 0
+
+        print("A velocidade media da via Principal 2 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Principal 2:':
+                    cont_carro += carro[2]
+                    contador += 1 
+        if contador != 0:
+            soma = cont_carro / contador 
+            print (f"{soma} KM/H \n")
+            cont_carro = 0
+            contador = 0
+
+        print("A velocidade media da via Auxiliar 1 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Auxilia 1:':
+                    cont_carro += carro[2]
+                    contador += 1 
+        if contador != 0:
+            soma = cont_carro / contador 
+            print (f"{soma} KM/H \n")
+            cont_carro = 0
+            contador = 0
+
+        print("A velocidade media da via Auxiliar 2 é: ")
+        for carro in cont_CV1:
+                if carro[0] == 'Via Auxilia 2:':
+                    cont_carro += carro[2]
+                    contador += 1 
+        if contador != 0:
+            soma = cont_carro / contador 
+            print (f"{soma} KM/H \n")
+            cont_carro = 0
+            contador = 0
     
 # Função para medir as infraçõess ---------------------------- 3 --------------------------------------------------
 def infracoes():
 
-
+    clear_terminal()
     print("Voce esta na tela 3, onde pode visualizar as infrações \n \n")
 
     print("Cruzamanto 2 \n")
@@ -151,6 +245,14 @@ def infracoes():
     print(f"{cont}")
     print("Numero de infrações por avanço do sinal vermelho: ")
     cont1 = len(cont_CSV)
+    print(f"{cont1}")
+
+    print("Cruzamanto 1 \n")
+    print("Numero de infrações por velocidade maxima ultrapassada: ")
+    cont = len(cont_CAV1)
+    print(f"{cont}")
+    print("Numero de infrações por avanço do sinal vermelho: ")
+    cont1 = len(cont_CSV1)
     print(f"{cont1}")
     
 
@@ -183,8 +285,13 @@ def recebe_dados(client_socket):
     global cont_CV 
     global cont_CSV 
     global cont_t
+    global cont_CAV1 
+    global cont_CV1 
+    global cont_CSV1 
+    global cont_t1
     thread_menu = threading.Thread(target=menu)
     thread_menu.start()
+
     while True:
         data = client_socket.recv(1024)
         if not data:
@@ -194,8 +301,8 @@ def recebe_dados(client_socket):
         cont_t += 1
 
 
-
-        if data_recebida['type'] == 'controlar_velocidade':
+        
+        if data_recebida['type'] == 'cruzamento2':
             dados = json.loads(data_recebida['data'])
             cont_CAV = [] 
             cont_CV = [] 
@@ -211,9 +318,26 @@ def recebe_dados(client_socket):
             for carro in dados['SinalVermelho']:
                 cont_CSV.append(carro)
 
+        if data_recebida['type'] == 'cruzamento1':
+            dados = json.loads(data_recebida['data'])
+            cont_CAV1 = [] 
+            cont_CV1 = [] 
+            cont_CSV1 = [] 
+
+            # print("Os carros a cima da velocidade são:")
+            for carro in dados['CarroVA']:
+                cont_CAV1.append(carro)
+            # print("A velocidade dos carros nas vias são:")
+            for carro in dados['CarroVN']:
+                cont_CV1.append(carro)
+            # print("Os carros que passaram o sinal vermelho são:")
+            for carro in dados['SinalVermelho']:
+                cont_CSV1.append(carro)
+
+
         response_data = json.dumps({"type": "ok"}).encode('utf-8')
         client_socket.send(response_data)
 
 if __name__ == "__main__":
     servidor()
-
+    
