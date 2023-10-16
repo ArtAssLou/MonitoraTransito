@@ -69,8 +69,6 @@ Este servidor foi criado para monitorar o tráfego em dois cruzamentos diferente
 
 Lembre-se de ajustar o endereço IP e a porta conforme necessário para a sua configuração de rede. Certifique-se de que os dados dos carros que passam pelos cruzamentos sejam enviados para o servidor de acordo com o formato esperado.
 
-Este código é um exemplo simplificado de um sistema de monitoramento de tráfego. Você pode expandi-lo e personalizá-lo de acordo com suas necessidades específicas, como a integração de sensores e dispositivos de tráfego reais.
-
 ## Requisitos
 
 - Python 3.x
@@ -91,7 +89,7 @@ Antes de executar este script, você deve ter as seguintes bibliotecas e compone
 - [json](https://docs.python.org/3/library/json.html) para processamento de dados em formato JSON.
 - Python 3.x.
 
-Certifique-se de conectar corretamente os componentes GPIO, como LEDs, botões e sensores, aos pinos do Raspberry Pi ou dispositivo compatível.
+Certifique-se de conectar corretamente os componentes GPIO, como LEDs, botões e sensores, aos pinos do Raspberry Pi.
 
 ## Configuração
 
@@ -103,8 +101,8 @@ O script interage com os seguintes componentes:
 
 - **LEDs dos Semáforos:** Controla o estado dos semáforos nas duas vias.
 - **Botões de Pedestres:** Detecta quando os pedestres pressionam o botão para atravessar a rua.
-- **Sensores de Presença:** Detecta a presença de veículos nas vias auxiliares.
-- **Sensores de Velocidade:** Detecta a velocidade dos veículos nas vias principais.
+- **Sensores de Parada:** Detecta a presença de veículos parados nas vias, aguardando a travessia.
+- **Sensores de Passagem:** Detecta a Passagem dos veículos nas vias.
 - **Buzzer:** Emite um sinal sonoro em certas condições.
 
 ## Funções Principais
