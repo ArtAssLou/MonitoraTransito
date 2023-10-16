@@ -6,16 +6,40 @@ import socket
 import json
 
 # Configurações do servidor e porta
-hosta = '164.41.98.29'  # ip da placa 7
-#hosta = ''
+#hosta = '164.41.98.29'  # ip da placa 7
+hosta = '164.41.98.28' # ip placa 6
 host = hosta
-port = 10761  # Insira a porta à qual deseja se conectar
+port = 10770  # Insira a porta à qual deseja se conectar
 
+
+# ------------------------------------------------------------
 # Servidor
 servidor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 servidor_socket.connect((host, port))
 
 
+# Configuração dos pinos GPIO para os LEDs dos semáforos
+semaforo_1 = [LED(10), LED(8), "off"]
+semaforo_2 = [LED(1), LED(18), "off"]
+
+# Configuração dos pinos GPIO para os botões de pedestres
+botao_pedestre_1 = Button(23)
+botao_pedestre_2 = Button(24)
+
+
+# Configuração dos pinos GPIO para os sensores de presença/passaegm
+sensor_via_auxiliar_1 = Button(25, bounce_time=0.01, pull_up=False)
+sensor_via_auxiliar_2 = Button(12, bounce_time=0.01, pull_up=False)
+
+# Configuração dos pinos GPIO para os sensores de velocidade/presença/passaegm
+sensor_via_principal_1 = Button(16, bounce_time=0.01, pull_up=False)
+sensor_via_principal_2 = Button(20, bounce_time=0.01, pull_up=False)
+
+# Configuração do pino GPIO para a saída de áudio (buzzer)
+buzzer = LED(21)
+
+# ------------------------------------------------------------
+'''
 # Configuração dos pinos GPIO para os LEDs dos semáforos
 semaforo_1 = [LED(9), LED(11), "off"]
 semaforo_2 = [LED(5), LED(6), "off"]
@@ -34,6 +58,7 @@ sensor_via_principal_2 = Button(27, bounce_time=0.01, pull_up=False)
 
 # Configuração do pino GPIO para a saída de áudio (buzzer)
 buzzer = LED(17)
+'''
 
 # Variaveis 
 botao_pressionadoP = False # Botões da rua Principal
