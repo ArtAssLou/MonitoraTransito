@@ -289,7 +289,7 @@ def controlar_velocidade():
             print(f"Erro ao enviar dados para o servidor: {e}")
         
         
-        sleep(5)
+        sleep(2)
 
 
 # Quando o botão é apertado
