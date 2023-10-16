@@ -2,7 +2,7 @@
 
 Este README descreve o código de um servidor de monitoramento de tráfego, projetado para coletar e exibir informações sobre o tráfego em dois cruzamentos diferentes. O servidor recebe dados de carros que passam por esses cruzamentos e fornece informações sobre o fluxo de tráfego, velocidade média e infrações de trânsito. Abaixo, você encontrará uma descrição das funções, variáveis e operações deste código.
 
-**Video de apresentação:** https://youtu.be/ifBa6T2b0Rc
+**Video de apresentação:** https://youtu.be/UoG3WCSTwiU
 
 ## Visão Geral do servidor Central
 
